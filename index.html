@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exam Countdown & Study Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">⏳</div>
+        <div>
+          <h1>Exam Countdown & Study Planner</h1>
+          <p class="muted">Enter exam details → generate a clean flowchart → save & revisit plans.</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="showPlansBtn" class="btn ghost">📂 Show Previous Plans</button>
+        <button id="clearAllBtn" class="btn danger">🗑️ Delete All</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT: Form + Saved -->
+      <section class="card">
+        <h2>Add / Update Plan</h2>
+        <form id="planForm">
+          <div class="row">
+            <div>
+              <label for="examName">Exam Name</label>
+              <select id="examName" required>
+                <option value="">-- Select Subject --</option>
+                <option value="CD">CD</option>
+                <option value="WT">WT</option>
+                <option value="CN">CN</option>
+                <option value="ML">ML</option>
+                <option value="MSD">MSD</option>
+                <option value="AI">AI</option>
+                <option value="DMT">DMT</option>
+              </select>
+            </div>
+            <div>
+              <label for="examDate">Exam Date</label>
+              <input id="examDate" type="date" required />
+            </div>
+          </div>
+
+          <!-- Topics dropdown -->
+          <label for="topics">Study Topics (choose multiple)</label>
+          <select id="topics" multiple>
+            <option value="Parsing">Parsing</option>
+            <option value="Automata">Automata</option>
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="Networking Protocols">Networking Protocols</option>
+            <option value="Regression">Regression</option>
+            <option value="AI Search">AI Search</option>
+            <option value="Database Design">Database Design</option>
+          </select>
+          <small class="muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple topics.</small>
+
+          <label for="subtopics">Sub-Topics (comma-separated)</label>
+          <input id="subtopics" type="text" placeholder="Enter sub-topics like: LL(1), TCP/IP, Backpropagation" />
+
+          <div class="row">
+            <div>
+              <label>Time / Topic (mins)</label>
+              <input id="timeTopic" type="number" min="0" value="60" />
+            </div>
+            <div>
+              <label>Time / Sub-topic (mins)</label>
+              <input id="timeSub" type="number" min="0" value="30" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn primary">➕ Add & Generate Flowchart</button>
+        </form>
+
+        <h3>Saved Plans</h3>
+        <div id="plansList" class="plans"></div>
+        <div id="noPlans" class="empty">No saved plans yet.</div>
+      </section>
+<!-- Modal for viewing plan -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+      <!-- RIGHT: Flowchart -->
+      <section class="card">
+        <h2>Study Plan Flowchart</h2>
+        <div id="meta" class="muted">Fill the form and generate to see the flowchart.</div>
+        <div id="diagram" class="mermaid-box">
+          <!-- we inject Mermaid code here -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

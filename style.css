@@ -1,0 +1,149 @@
+:root {
+  --bg: #0a0f1f;
+  --panel: #111827;
+  --ink: #f8fafc;
+  --muted: #9ca3af;
+
+  /* Updated Vibrant Brand Colors */
+  --brand: #00e0ff;
+  --brand2: #ff6ec7;
+  --ok: #00d98b;
+  --warn: #facc15;
+  --danger: #ff4757;
+
+  --ring: rgba(0, 224, 255, 0.45);
+  --radius: 16px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, .45);
+}
+
+* { box-sizing: border-box }
+html, body { height: 100% }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: radial-gradient(1000px 420px at 90% -10%, rgba(0,224,255,.18), transparent 60%),
+              radial-gradient(900px 360px at 5% -15%, rgba(255,110,199,.15), transparent 60%),
+              var(--bg);
+  color: var(--ink);
+}
+
+.wrap { max-width: 1100px; margin: 34px auto; padding: 0 16px }
+header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px }
+.brand { display:flex; gap:12px; align-items:center }
+.logo {
+  width:48px; height:48px; border-radius:12px; display:grid; place-items:center;
+  background: linear-gradient(135deg, var(--brand2), var(--brand));
+  box-shadow: var(--shadow); font-size:22px; color: #fff;
+}
+.muted { color: var(--muted) }
+
+.actions { display:flex; gap:8px; flex-wrap:wrap }
+.btn {
+  cursor:pointer; border-radius:12px; padding:10px 14px; font-weight:600;
+  border:1px solid transparent; transition: all .25s ease;
+}
+.primary {
+  background: linear-gradient(135deg, #00d98b, var(--brand));
+  color:#041014; border:0;
+}
+.primary:hover { filter: brightness(1.1); }
+
+.ghost {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,.25);
+  color: var(--ink);
+}
+.ghost:hover { border-color: var(--brand); color: var(--brand); }
+
+.danger { background: var(--danger); color:#fff; border:0 }
+.danger:hover { filter: brightness(1.1); }
+
+.grid { display:grid; grid-template-columns: 1.05fr .95fr; gap:18px }
+@media (max-width: 950px){ .grid { grid-template-columns: 1fr } }
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius); padding:18px; box-shadow: var(--shadow)
+}
+
+.row { display:grid; grid-template-columns:1fr 1fr; gap:10px }
+@media (max-width:680px){ .row { grid-template-columns:1fr } }
+
+label { display:block; font-size:13px; color:var(--muted); margin:8px 0 6px }
+input, button {
+  width:100%; background:#0f172a; color:var(--ink);
+  border:1px solid rgba(255,255,255,.25); outline:none;
+  border-radius:12px; padding:10px 12px; font-size:14px;
+  transition: all .2s ease;
+}
+input:focus {
+  box-shadow:0 0 0 4px var(--ring);
+  border-color: var(--brand)
+}
+button { cursor:pointer }
+
+.plans { display:flex; flex-direction:column; gap:10px }
+.plan {
+  display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px;
+  background:#141e30;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+}
+.plan small { color:var(--muted) }
+.empty {
+  padding:14px; text-align:center; border:1px dashed rgba(255,255,255,.25);
+  border-radius:12px; color:var(--muted)
+}
+
+.mermaid-box {
+  background:#101828; border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:12px; min-height:220px; overflow:auto
+}
+svg { max-width:none }
+
+.toast {
+  position: fixed; right:16px; bottom:16px; padding:12px 14px; border-radius:12px;
+  background:#101828; border:1px solid rgba(0,224,255,.35);
+  color:#e2f0ff; box-shadow:var(--shadow);
+  opacity:0; transform:translateY(10px); transition:.25s
+}
+.toast.show { opacity:1; transform:translateY(0) }
+
+/* Toast notifications */
+.toast.success { background: #00d98b; }
+.toast.error { background: #ff4757; }
+.toast.info { background: #00e0ff; }
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.modal-content {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  margin: 10% auto;
+  padding: 20px;
+  width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  color: #fff;
+}
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+}
+.close:hover { color: var(--warn); }
+
+
+
+
+
+
+

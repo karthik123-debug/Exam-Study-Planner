@@ -1,39 +1,103 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="theme-color"
+    content="#080d1b"
+  />
+
+  <meta
+    name="description"
+    content="Organize your exams, manage study topics, track countdowns, and generate study plan flowcharts."
+  />
+
   <title>Exam Countdown & Study Planner</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Mermaid -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- Mermaid Flowchart Library -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
+
 <body>
+
   <div class="wrap">
+
+    <!-- HEADER -->
     <header>
+
       <div class="brand">
+
         <div class="logo">⏳</div>
+
         <div>
           <h1>Exam Countdown & Study Planner</h1>
-          <p class="muted">Enter exam details → generate a clean flowchart → save & revisit plans.</p>
+
+          <p class="muted">
+            Enter exam details → generate a clean flowchart
+            → save and revisit your plans.
+          </p>
         </div>
+
       </div>
+
       <div class="actions">
-        <button id="showPlansBtn" class="btn ghost">📂 Show Previous Plans</button>
-        <button id="clearAllBtn" class="btn danger">🗑️ Delete All</button>
+
+        <button
+          id="showPlansBtn"
+          class="btn ghost"
+          type="button"
+        >
+          📂 Show Previous Plans
+        </button>
+
+        <button
+          id="clearAllBtn"
+          class="btn danger"
+          type="button"
+        >
+          🗑️ Delete All
+        </button>
+
       </div>
+
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="grid">
-      <!-- LEFT: Form + Saved -->
+
+      <!-- LEFT SECTION -->
       <section class="card">
+
         <h2>Add / Update Plan</h2>
+
+        <!-- PLAN FORM -->
         <form id="planForm">
+
+          <!-- EXAM DETAILS -->
           <div class="row">
+
             <div>
-              <label for="examName">Exam Name</label>
+              <label for="examName">
+                Exam Name
+              </label>
+
               <select id="examName" required>
-                <option value="">-- Select Subject --</option>
+
+                <option value="">
+                  -- Select Subject --
+                </option>
+
                 <option value="CD">CD</option>
                 <option value="WT">WT</option>
                 <option value="CN">CN</option>
@@ -41,70 +105,217 @@
                 <option value="MSD">MSD</option>
                 <option value="AI">AI</option>
                 <option value="DMT">DMT</option>
+
               </select>
             </div>
+
             <div>
-              <label for="examDate">Exam Date</label>
-              <input id="examDate" type="date" required />
+              <label for="examDate">
+                Exam Date
+              </label>
+
+              <input
+                id="examDate"
+                type="date"
+                required
+              />
             </div>
+
           </div>
 
-          <!-- Topics dropdown -->
-          <label for="topics">Study Topics (choose multiple)</label>
-          <select id="topics" multiple>
-            <option value="Parsing">Parsing</option>
-            <option value="Automata">Automata</option>
-            <option value="HTML">HTML</option>
-            <option value="CSS">CSS</option>
-            <option value="Networking Protocols">Networking Protocols</option>
-            <option value="Regression">Regression</option>
-            <option value="AI Search">AI Search</option>
-            <option value="Database Design">Database Design</option>
-          </select>
-          <small class="muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple topics.</small>
+          <!-- STUDY TOPICS -->
+          <div>
 
-          <label for="subtopics">Sub-Topics (comma-separated)</label>
-          <input id="subtopics" type="text" placeholder="Enter sub-topics like: LL(1), TCP/IP, Backpropagation" />
+            <label for="topics">
+              Study Topics (choose multiple)
+            </label>
 
+            <select
+              id="topics"
+              multiple
+            >
+
+              <option value="Parsing">Parsing</option>
+              <option value="Automata">Automata</option>
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+
+              <option value="Networking Protocols">
+                Networking Protocols
+              </option>
+
+              <option value="Regression">
+                Regression
+              </option>
+
+              <option value="AI Search">
+                AI Search
+              </option>
+
+              <option value="Database Design">
+                Database Design
+              </option>
+
+            </select>
+
+            <small class="muted">
+              Hold Ctrl (Windows) or Cmd (Mac)
+              to select multiple topics.
+            </small>
+
+          </div>
+
+          <!-- SUBTOPICS -->
+          <div>
+
+            <label for="subtopics">
+              Sub-Topics (choose multiple)
+            </label>
+
+            <select
+              id="subtopics"
+              multiple
+              disabled
+            >
+            </select>
+
+            <small class="muted">
+              Select a subject first to load subtopics.
+              Hold Ctrl or Cmd to select multiple.
+            </small>
+
+          </div>
+
+          <!-- STUDY TIME -->
           <div class="row">
+
             <div>
-              <label>Time / Topic (mins)</label>
-              <input id="timeTopic" type="number" min="0" value="60" />
+
+              <label for="timeTopic">
+                Time / Topic (mins)
+              </label>
+
+              <input
+                id="timeTopic"
+                type="number"
+                min="1"
+                value="60"
+                required
+              />
+
             </div>
+
             <div>
-              <label>Time / Sub-topic (mins)</label>
-              <input id="timeSub" type="number" min="0" value="30" />
+
+              <label for="timeSub">
+                Time / Sub-topic (mins)
+              </label>
+
+              <input
+                id="timeSub"
+                type="number"
+                min="1"
+                value="30"
+                required
+              />
+
             </div>
+
           </div>
 
-          <button type="submit" class="btn primary">➕ Add & Generate Flowchart</button>
+          <!-- SUBMIT -->
+          <button
+            type="submit"
+            class="btn primary"
+          >
+            ➕ Add & Generate Flowchart
+          </button>
+
         </form>
 
+        <!-- SAVED PLANS -->
         <h3>Saved Plans</h3>
-        <div id="plansList" class="plans"></div>
-        <div id="noPlans" class="empty">No saved plans yet.</div>
-      </section>
-<!-- Modal for viewing plan -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span id="closeModal" class="close">&times;</span>
-    <div id="modalContent"></div>
-  </div>
-</div>
 
-      <!-- RIGHT: Flowchart -->
-      <section class="card">
-        <h2>Study Plan Flowchart</h2>
-        <div id="meta" class="muted">Fill the form and generate to see the flowchart.</div>
-        <div id="diagram" class="mermaid-box">
-          <!-- we inject Mermaid code here -->
+        <div
+          id="plansList"
+          class="plans"
+        >
         </div>
+
+        <div
+          id="noPlans"
+          class="empty"
+        >
+          No saved plans yet.
+        </div>
+
       </section>
+
+      <!-- RIGHT SECTION -->
+      <section class="card">
+
+        <h2>Study Plan Flowchart</h2>
+
+        <div
+          id="meta"
+          class="muted"
+          aria-live="polite"
+        >
+          Fill the form and generate
+          to see your study plan.
+        </div>
+
+        <div
+          id="diagram"
+          class="mermaid-box"
+          aria-live="polite"
+        >
+        </div>
+
+      </section>
+
     </main>
+
   </div>
 
-  <div id="toast" class="toast"></div>
+  <!-- PLAN DETAILS MODAL -->
+  <div
+    id="modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Saved study plan"
+  >
 
-  <script src="script.js"></script>
+    <div class="modal-content">
+
+      <button
+        id="closeModal"
+        class="close"
+        type="button"
+        aria-label="Close modal"
+      >
+        &times;
+      </button>
+
+      <div id="modalContent"></div>
+
+    </div>
+
+  </div>
+
+  <!-- TOAST MESSAGE -->
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  >
+  </div>
+
+  <!-- MAIN JAVASCRIPT -->
+  <script src="./script.js"></script>
+
 </body>
+
 </html>
